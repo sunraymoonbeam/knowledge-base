@@ -1,5 +1,5 @@
 ---
-title: 5.  Linux File System
+title: Linux File System
 ---
 # Linux Filesystem Hierarchy Standard
 The Linux Filesystem Hierarchy Standard (FHS) is a set of guidelines that organizes how files and directories are structured on a Linux system. It helps ensure that important system files, user data, and program files are kept in predictable places, making it easier for users and administrators to manage the system. Understanding the FHS can help you navigate and maintain a Linux system more easily and troubleshoot issues.

@@ -6,11 +6,8 @@ title: '2. Users, Groups & File Permissions'
 </div>
 
 # Resources
-1. https://linuxjourney.com/lesson/users-and-groupshttps://github.com/sunraymoonbeam/knowledge-base.wiki.git
-1. https://linuxjourney.com/lesson/file-permissions
-1. https://www.linuxfoundation.org/blog/blog//classic-sysadmin-understanding-linux-file-permissions
+1. https://linuxjourney.com/lesson/users-and-groups
 1. https://medium.com/@jasurbek.go.dev/users-groups-and-permissions-in-linux-1fa6d56b744a
-1. https://www.multacom.com/faq/password_protection/file_permissions.htm
 1. https://dev.to/izackv/running-a-docker-container-with-a-custom-non-root-user-syncing-host-and-container-permissions-26mb
 
 

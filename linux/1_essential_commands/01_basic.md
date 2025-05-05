@@ -1,5 +1,5 @@
 ---
-title: 1. Essential Commands
+title: Basic Commands
 ---
 <div style="text-align: center;">
     <img src="https://media.licdn.com/dms/image/D5612AQGd-Va5Jsa57g/article-cover_image-shrink_600_2000/0/1681635902710?e=2147483647&v=beta&t=4xhKrwCXKBmglW5pFQ1a7B02vh3GzJMJXd9zDoBl-lg" style="transform: scale(0.7);">
@@ -12,10 +12,11 @@ title: 1. Essential Commands
 
 # Table of Contents
 0. [Summary](#Summary)
-1. [File Manipulation](#1-file-manipulation)
+1. [File Management](#1-file-management)
 1. [Directory Management](#2-directory-management)
-1. [Text Manipulation & Navigation](#3-text-manipulation-and-navigation)
-1. [Environment Management](#4-environment-management)
+1. [File Viewing](#3-file-viewing)
+1. [Text / Output Processing](#4-text--output-processing)
+1. [Environment Management](#5-environment-management)
 1. [Pipes](#pipes)
 1. [Others](#others)
 
@@ -24,26 +25,27 @@ title: 1. Essential Commands
 ---
 | S/N | Command         | Description                                         | Example Usage                    |
 | --- | ----------------| --------------------------------------------------- | -------------------------------- |
-|     |                 | **File Manipulation**                               |                                  |
+|     |                 | **File Management**                                 |                                  |
 | 1   | `touch`         | Creates an empty file                               | `touch file1.txt`                |
 | 2   | `cp`            | Copies file or directory                            | `cp file1.txt backup/`           |
 | 3   | `mv`            | Moves or renames a file or directory                | `mv oldname.txt newname.txt`     |
 | 4   | `rm`            | Removes a file                                      | `rm unwanted.txt`                |
-| 5   | `cat`           | Displays file contents                              | `cat file1.txt`                  |
-| 6   | `file`          | Displays file type                                  | `file image.png`                 |
-| 7   | `less`          | Views file contents one page at a time              | `less file1.txt`                 |
 |     |                 | **Directory Management**                            |                                  |
-| 8   | `pwd`           | Prints the current working directory                | `pwd`                            |
-| 9   | `cd`            | Changes the current directory                       | `cd /var/www/html`               |
-| 10  | `ls`            | Lists files and directories                         | `ls -lah`                        |
-| 11  | `mkdir`         | Creates a new directory                             | `mkdir new_project`              |
-| 12  | `rmdir`         | Removes an empty directory                          | `rmdir old_empty_folder`         |
-|     |                 | **Text Manipulation & Navigation**                  |                                  |
-| 13  | `tail`          | Outputs the last part of files                      | `tail -n 10 file1.txt`           |
-| 14  | `head`          | Outputs the first part of files                     | `head -n 10 file1.txt`           |
-| 15  | `uniq`          | Reports or omits repeated lines                     | `uniq file1.txt`                 |
-| 16  | `sort`          | Sorts lines of text files                           | `sort file1.txt`                 |
-| 17  | `find`          | Finds files matching a pattern in a specified path  | `find / -name -type f "*.log"`   |
+| 5   | `pwd`           | Prints the current working directory                | `pwd`                            |
+| 6   | `cd`            | Changes the current directory                       | `cd /var/www/html`               |
+| 7   | `ls`            | Lists files and directories                         | `ls -lah`                        |
+| 8   | `mkdir`         | Creates a new directory                             | `mkdir new_project`              |
+| 9   | `rmdir`         | Removes an empty directory                          | `rmdir old_empty_folder`         |
+|     |                 | **File Viewing**                                    |                                  |
+| 10  | `cat`           | Displays file contents                              | `cat file1.txt`                  |
+| 11  | `file`          | Displays file type                                  | `file image.png`                 |
+| 12  | `less`          | Views file contents one page at a time              | `less file1.txt`                 |
+| 13  | `head`          | Outputs the first part of files                     | `head -n 10 file1.txt`           |
+| 14  | `tail`          | Outputs the last part of files                      | `tail -n 10 file1.txt`           |
+|     |                 | **Text / Output Processing**                        |                                  |
+| 15  | `sort`          | Sorts lines of text files                           | `sort file1.txt`                 |
+| 16  | `uniq`          | Reports or omits repeated lines                     | `uniq file1.txt`                 |
+| 17  | `find`          | Finds files matching a pattern in a specified path  | `find . -name "*.log" -type f`   |
 | 18  | `grep`          | Searches for a pattern in a file                    | `grep "error" logs.txt`          |
 | 19  | `wc`            | Counts lines, words, and characters in a file       | `wc -l file1.txt`                |
 | 20  | `nl`            | Numbers the lines in a file                         | `nl file1.txt`                   |
@@ -64,16 +66,12 @@ title: 1. Essential Commands
 | 33  | `time`          | Measure the duration of command execution.          | `time ls`                        |
 
 
-## 1. File Manipulation
+## 1. File Management
 ```zsh
     touch filename
     cp source destination
     mv source destination
     rm filename
-    cat filename
-    file filename
-    open filename
-    less filename
 ```
 ---
 1. **touch** - Create an empty file or update the timestamp of an existing file.
@@ -87,8 +85,10 @@ title: 1. Essential Commands
     ```zsh
     cp source destination
     ```
-    - Common flags: `-r` (recursive for directories), `-i` (interactive)
+    - Common flags: `-r` (recursive for directories), `-i` (interactive, prompts before overwriting), `-t` (specify the target directory explicitly), `-v` (verbose, shows the files being copied)
     - Usage: `cp file1.txt file2.txt` - Copy file1.txt and name the copy file2.txt.
+    - Usage with `-r`: `cp -r dir1/ dir2/` - Copy the contents of dir1 to dir2.
+    - Usage with `-t`: `cp -t target_dir file1.txt file2.txt` - Copy `file1.txt` and `file2.txt` into `target_dir`.
 
 3. **mv** - Move or rename files or directories.
     ```zsh
@@ -99,34 +99,12 @@ title: 1. Essential Commands
     - Usage with `-b`: `mv -b file1.txt file2.txt` - Move file1.txt to file2.txt, creating a backup of file2.txt if it exists.
     - Usage with `-i`: `mv -i file1.txt file2.txt` - Move file1.txt to file2.txt, prompting for confirmation if file2.txt exists.
 
-4. **rm** - Remove files or directories.
+4. **rm** - Remove files or directories. Note that only empty directories can be removed with `rm`.
     ```zsh
     rm filename
     ```
     - Common flags: `-r` (recursive for directories), `-f` (force) -> please be careful when using this.
     - Usage: `rm file.txt` - Remove the file file.txt.
-
-5. **cat** - Concatenate and display file content.
-    ```zsh
-    cat filename
-    ```
-    - Common flags: `-n` (number lines)
-    - Usage 1: `cat file.txt` - Display the content of file.txt.
-    - Usage 2: `cat file1 file2 >> file3` - Concatenate  the  content  of  multiple  files  into  a  new file
-
-6. **file** - Determine file type.
-    ```zsh
-    file filename
-    ```
-    - Common flags: None
-    - Usage: `file file.txt` - Determine the type of file.txt.
-
-7. **less** - View file content one screen at a time.
-    ```zsh
-    less filename
-    ```
-    - Common flags: `-N` (show line numbers), `-S` (chop long lines)
-    - Usage: `less file.txt` - View the content of file.txt one screen at a time.
 
 
 ## 2. Directory Management
@@ -138,37 +116,38 @@ title: 1. Essential Commands
     rmdir
 ```
 ---
-8. **pwd** - Print working directory.
+5. **pwd** - Print working directory.
     ```zsh
     pwd
     ```
     - Common flags: None
     - Usage: `pwd` - Print the current working directory.
 
-9. **cd** - Change directory.
+6. **cd** - Change directory.
     ```zsh
     cd directory
     ```
     - Common flags: None
     - Usage: `cd /path/to/directory` - Change the current directory to /path/to/directory.
-    - Usage: `cd ..` - Navigate up one level in the directory hierarchy (parent directory).
+    - Usage: `cd ..` - Navigate up one level in the directory hierarchy (parent directory). To go up two levels, use `cd ../..`.
     - Usage: `cd -` - Change the current directory to the previous most recent directory.
 
-10. **ls** - List directory contents.
+7. **ls** - List directory contents.
     ```zsh
     ls
     ```
-    - Common flags: `-l` (long format), `-a` (all files including hidden), `-h` (human-readable sizes), `t` ([t]ime the file was modified)
+    - Common flags: `-l` (long format), `-a` (all files including hidden), `-h` (human-readable sizes), `t` (sorted by the [t]ime the file was modified)
     - Usage: `ls -lhat` - List all files and directories in long format with human-readable sizes.
 
-11. **mkdir** - Create a new directory.
+8. **mkdir** - Create a new directory.
     ```zsh
     mkdir directory
     ```
     - Common flags: `-p` (create parent directories as needed)
     - Usage: `mkdir newdir` - Create a new directory called newdir.
+    - Usage with `-p`: `mkdir -p parent/child` - Create the directory child inside the directory parent, creating parent if it doesn't exist.
 
-12. **rmdir** - Remove an empty directory.
+9. **rmdir** - Remove an empty directory.
     ```zsh
     rmdir directory
     ```
@@ -176,20 +155,46 @@ title: 1. Essential Commands
     - Usage: `rmdir olddir` - Remove the empty directory called olddir.
 
 
-## 3. Text Manipulation and Navigation
+## 3. File Viewing
 ```zsh
-    tail file
+    cat filename
+    file filename
+    open filename
+    less filename
     head file
-    uniq file
-    sort file
-    find path -name pattern
-    grep pattern file
-    wc file
-    nl file
-    pipes |
+    tail file
 ```
 ---
-13. **tail** - Output the last part of files.
+10. **cat** - Concatenate and display file content.
+    ```zsh
+    cat filename
+    ```
+    - Common flags: `-n` (number lines)
+    - Usage 1: `cat file.txt` - Display the content of file.txt.
+    - Usage 2: `cat file1 file2 >> file3` - Concatenate  the  content  of  multiple  files  into  a  new file
+
+11. **file** - Determine file type.
+    ```zsh
+    file filename
+    ```
+    - Common flags: None
+    - Usage: `file file.txt` - Determine the type of file.txt.
+
+12. **less** - View file content one screen at a time.
+    ```zsh
+    less filename
+    ```
+    - Common flags: `-N` (show line numbers), `-S` (chop long lines)
+    - Usage: `less file.txt` - View the content of file.txt one screen at a time.
+
+13. **head** - Output the first part of files.
+    ```zsh
+    head file
+    ```
+    Common flags: -n (number of lines)
+    Usage: `head -n 10 file.txt` - Display the first 10 lines of file.txt.
+
+14. **tail** - Output the last part of files.
     ```zsh
     tail file
     ```
@@ -197,31 +202,38 @@ title: 1. Essential Commands
     Usage 1: `tail -n 10 file.txt` - Display the last 10 lines of file.txt.
     Usage 2: `tail -f file.txt` - Follow the file as it grows, useful for logs.
 
-14. **head** - Output the first part of files.
-    ```zsh
-    head file
-    ```
-    Common flags: -n (number of lines)
-    Usage: `head -n 10 file.txt` - Display the first 10 lines of file.txt.
 
-15. **uniq** - Report or omit repeated lines.
+## 4. Text / Output Processing
+```zsh
+    sort file
+    uniq file
+    find path -name pattern
+    grep pattern file
+    wc file
+    nl file
+```
+15. **sort** - Sort lines of text files.
+    ```zsh
+    sort file
+    ```
+    - Common flags: `-r` (reverse), `-n` (numeric sort), `-u` (unique sort, removes duplicates),  `-k` (sort by specific column)
+    - Usage: `sort file.txt` - Sort the lines in file.txt alphabetically.
+
+16. **uniq** - Report or omit repeated lines.
+    Note that `uniq` only works on sorted files, repeated lines must be adjacent. Thus, it is often used in conjunction with `sort`.
     ```zsh
     uniq file
     ```
     - Common flags: `-c` (count), `-d` (only duplicates), `-u` (only unique)
-    - Usage 1: `uniq file.txt` - Remove duplicate lines from file.txt.
-    - Usage 2: `uniq -c file.txt` - Count the occurrences of each line in file.txt.
-    - Usage 3: `uniq -d file.txt` - Display only the duplicate lines in file.txt.
-    - Usage 4: `uniq -u file.txt` - Display only the unique lines in file.txt.
-
-16. **sort** - Sort lines of text files.
-    ```zsh
-    sort file
-    ```
-    - Common flags: `-r` (reverse), `-n` (numeric sort), `-u` (unique sort)
-    - Usage: `sort file.txt` - Sort the lines in file.txt alphabetically.
+    - Usage 1: `sort file.txt | uniq` - Remove duplicate lines from file.txt.
+    - Usage 2: `sort file.txt | uniq -c` - Count the occurrences of each line in file.txt.
+    - Usage 3: `sort file.txt | uniq -dc` - Display only the duplicate lines in file.txt, along with their number of occurences.
+    - Usage 4: `sort file.txt | uniq -u` - Display only the unique lines in file.txt (the lines that only appear exactly once in the file).
 
 17. **find** - Search for files in a directory hierarchy recursively.
+
+    Note that the `find` command is **recursive** by default. It searches through the specified directory and all its subdirectories unless you limit the depth of the search using the `-maxdepth` option.
+
     ```zsh
     find path -name pattern
     ```
@@ -241,7 +253,8 @@ title: 1. Essential Commands
     - Usage 3: `grep -n -C 2 "search_term" file.txt` - Display the line number and 2 lines before and after each match.
     - Usage 4: `grep "search.*term" file.txt` - Search for any text that starts with "search" and ends with "term" with any characters in between in file.txt.
 
-19. **wc** - Word, line, character, and byte count.
+19. **wc** - Count lines, word, or bytes/characters.
+    A line is defined as a sequence of characters ending with a newline character (`\n`). A word is defined as a sequence of characters separated by whitespace (spaces, tabs, or newlines). A byte is defined as a sequence of 8 bits, and a character is defined as a single unit of text (which may be more than one byte in some encodings).
     ```zsh
     wc file
     ```
@@ -256,9 +269,10 @@ title: 1. Essential Commands
     ```
     - Common flags: None
     - Usage 1: `nl file.txt` - Display the number of lines in file.txt.
-    - Usage 2: `find . -maxdepth 1 -name "*.png" | nl` - Number the `.png` files in the current directory.
+    - Usage 2: `find . -maxdepth 1 -name "*.png" | nl` - Number and list the `.png` files in the current directory.
 
-## 4. Environment Management
+
+## 5. Environment Management
 In computer operating systems, an environment is a collection of settings and information that defines the behavior of programs and applications. This environment includes various parameters that can influence how software operates, such as paths to executable files, user preferences, and system configurations.
 
 Linux environment variables are key-value pairs used by applications to obtain information about the environment in which they are running. Each environment variable has a unique name and an associated value. These variables can control various aspects of the system's behavior and are essential for the proper functioning of many applications.
@@ -312,6 +326,7 @@ By setting and modifying environment variables, users and administrators can cus
     ```
     - Common flags: None
     - Usage: `unset VARIABLE` - Remove the VARIABLE environment variable.
+
 
 ## Pipes
 ![image](https://linuxhandbook.com/content/images/2020/09/pipe-redirection.png)

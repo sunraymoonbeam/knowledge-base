@@ -21,26 +21,27 @@ title: 0. Linux Cheatsheet
 ### Basic Commands
 | S/N | Command         | Description                                         | Example Usage                    |
 | --- | ----------------| --------------------------------------------------- | -------------------------------- |
-|     |                 | **File Manipulation**                               |                                  |
+|     |                 | **File Management**                                 |                                  |
 | 1   | `touch`         | Creates an empty file                               | `touch file1.txt`                |
 | 2   | `cp`            | Copies file or directory                            | `cp file1.txt backup/`           |
 | 3   | `mv`            | Moves or renames a file or directory                | `mv oldname.txt newname.txt`     |
 | 4   | `rm`            | Removes a file                                      | `rm unwanted.txt`                |
-| 5   | `cat`           | Displays file contents                              | `cat file1.txt`                  |
-| 6   | `file`          | Displays file type                                  | `file image.png`                 |
-| 7   | `less`          | Views file contents one page at a time              | `less file1.txt`                 |
 |     |                 | **Directory Management**                            |                                  |
-| 8   | `pwd`           | Prints the current working directory                | `pwd`                            |
-| 9   | `cd`            | Changes the current directory                       | `cd /var/www/html`               |
-| 10  | `ls`            | Lists files and directories                         | `ls -lah`                        |
-| 11  | `mkdir`         | Creates a new directory                             | `mkdir new_project`              |
-| 12  | `rmdir`         | Removes an empty directory                          | `rmdir old_empty_folder`         |
-|     |                 | **Text Manipulation & Navigation**                  |                                  |
-| 13  | `tail`          | Outputs the last part of files                      | `tail -n 10 file1.txt`           |
-| 14  | `head`          | Outputs the first part of files                     | `head -n 10 file1.txt`           |
-| 15  | `uniq`          | Reports or omits repeated lines                     | `uniq file1.txt`                 |
-| 16  | `sort`          | Sorts lines of text files                           | `sort file1.txt`                 |
-| 17  | `find`          | Finds files matching a pattern in a specified path  | `find / -name -type f "*.log"`   |
+| 5   | `pwd`           | Prints the current working directory                | `pwd`                            |
+| 6   | `cd`            | Changes the current directory                       | `cd /var/www/html`               |
+| 7   | `ls`            | Lists files and directories                         | `ls -lah`                        |
+| 8   | `mkdir`         | Creates a new directory                             | `mkdir new_project`              |
+| 9   | `rmdir`         | Removes an empty directory                          | `rmdir old_empty_folder`         |
+|     |                 | **File Viewing**                                    |                                  |
+| 10  | `cat`           | Displays file contents                              | `cat file1.txt`                  |
+| 11  | `file`          | Displays file type                                  | `file image.png`                 |
+| 12  | `less`          | Views file contents one page at a time              | `less file1.txt`                 |
+| 13  | `head`          | Outputs the first part of files                     | `head -n 10 file1.txt`           |
+| 14  | `tail`          | Outputs the last part of files                      | `tail -n 10 file1.txt`           |
+|     |                 | **Text / Output Processing**                        |                                  |
+| 15  | `sort`          | Sorts lines of text files                           | `sort file1.txt`                 |
+| 16  | `uniq`          | Reports or omits repeated lines                     | `uniq file1.txt`                 |
+| 17  | `find`          | Finds files matching a pattern in a specified path  | `find . -name "*.log" -type f`   |
 | 18  | `grep`          | Searches for a pattern in a file                    | `grep "error" logs.txt`          |
 | 19  | `wc`            | Counts lines, words, and characters in a file       | `wc -l file1.txt`                |
 | 20  | `nl`            | Numbers the lines in a file                         | `nl file1.txt`                   |
@@ -54,13 +55,22 @@ title: 0. Linux Cheatsheet
 |     |                 | **Others**                                          |                                  |
 | 27  | `which`         | Shows the full path of shell commands               | `which python`                   |
 | 28  | `alias`         | Creates an alias for a command                      | `alias ll='ls -la'`              |
-| 29  | `tee`           | Reads from standard input and writes to standard output and files | `echo "Hello" \| tee output.txt` |
+| 29  | `tee`           | Reads from standard input and writes to standard output and files | `echo "Hello" \| tee output.txt`   |
 | 30  | `history`       | Shows the command history                           | `history`                        |
 | 31  | `clear`         | Clears the terminal screen                          | `clear`                          |
 | 32  | `man`           | Displays the manual for a command                   | `man ls`                         |
 | 33  | `time`          | Measure the duration of command execution.          | `time ls`                        |
 
-### User, Groups and File Permissions
+## File Permissions
+| 1   | `ls -l`   | Lists files with permission info in long format | `ls -l`                           |
+| 2   | `chmod`   | Changes file/directory permissions              | `chmod 755 script.sh`             |
+| 3   | `chown`   | Changes file owner and group                    | `sudo chown user:group file.txt`  |
+| 4   | `chgrp`   | Changes group ownership of a file               | `sudo chgrp devs report.txt`      |
+| 5   | `umask`   | Sets default permission mask for new files      | `umask 022`                       |
+| 6   | `getfacl` | Views ACL (Access Control List) permissions     | `getfacl file.txt`                |
+| 7   | `setfacl` | Sets fine-grained ACL permissions               | `setfacl -m u:alice:r-- file.txt` |
+
+### User & Groups Permissions
 | S/N | Command         | Description                                         | Example Usage                    |
 | --- | ----------------| --------------------------------------------------- | -------------------------------- |
 | 1   | `su`            | Switches to another user                            | `su root`                        |
@@ -68,8 +78,6 @@ title: 0. Linux Cheatsheet
 | 3   | `whoami`        | Displays the current user                           | `whoami`                         |
 | 4   | `useradd`       | Adds a new user                                     | `sudo useradd alice`             |
 | 5   | `groupadd`      | Adds a new group                                    | `sudo groupadd developers`       |
-| 6   | `chmod`         | Changes file permissions                            | `chmod 755 script.sh`            |
-| 7   | `chown`         | Changes file ownership                              | `sudo chown user:group file.txt` |
 
 ### Process Management
 | S/N | Command         | Description                                         | Example Usage                    |

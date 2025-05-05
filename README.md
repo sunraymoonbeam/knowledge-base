@@ -1,0 +1,1 @@
+A consolidated knowledge base of practical lessons on essential tools and workflows in modern DevOps — including Linux OS, Git for version control, Docker, Python dependency management, and CI/CD with GitHub Actions / GitLab CI.
